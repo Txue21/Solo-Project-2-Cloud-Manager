@@ -1,15 +1,22 @@
+const API_URL = 'http://tian-games.gamer.gd/api.php'; 
+const gameForm = document.getElementById('game-form');
 let allGames = [];
 let currentPage = 1;
 const pageSize = 10;
-const gameForm = document.getElementById('game-form');
 
+// READ: Fetch all data from your live PHP API
 async function loadGames() {
-    const response = await fetch('api.php');
-    allGames = await response.json();
-    renderTable();
-    updateStats();
+    try {
+        const response = await fetch(API_URL);
+        allGames = await response.json();
+        renderTable();
+        updateStats();
+    } catch (error) {
+        console.error("Error loading games:", error);
+    }
 }
 
+// RENDER: Displays only 10 games per page (Paging Requirement)
 function renderTable() {
     const tbody = document.getElementById('game-list-body');
     tbody.innerHTML = '';
@@ -31,9 +38,11 @@ function renderTable() {
         `;
         tbody.appendChild(row);
     });
+
     document.getElementById('page-info').innerText = `Page ${currentPage}`;
 }
 
+// Paging Controls
 function nextPage() {
     if (currentPage * pageSize < allGames.length) {
         currentPage++;
@@ -48,6 +57,7 @@ function prevPage() {
     }
 }
 
+// Stats Calculation
 function updateStats() {
     const totalCount = allGames.length;
     const totalHours = allGames.reduce((sum, g) => sum + Number(g.hoursPlayed), 0);
@@ -58,6 +68,7 @@ function updateStats() {
     document.getElementById('stat-avg-hours').innerText = avgHours;
 }
 
+// CREATE & UPDATE: Send data to the PHP server
 gameForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const id = document.getElementById('game-id').value;
@@ -70,9 +81,9 @@ gameForm.addEventListener('submit', async (e) => {
 
     if (id) {
         gameData.id = id;
-        await fetch('api.php', { method: 'PUT', body: JSON.stringify(gameData) });
+        await fetch(API_URL, { method: 'PUT', body: JSON.stringify(gameData) });
     } else {
-        await fetch('api.php', { method: 'POST', body: JSON.stringify(gameData) });
+        await fetch(API_URL, { method: 'POST', body: JSON.stringify(gameData) });
     }
 
     gameForm.reset();
@@ -81,9 +92,10 @@ gameForm.addEventListener('submit', async (e) => {
     loadGames();
 });
 
+// DELETE: Remove data via PHP API
 async function deleteGame(id) {
-    if (confirm("Are you sure?")) {
-        await fetch(`api.php?id=${id}`, { method: 'DELETE' });
+    if (confirm("Are you sure you want to remove this game?")) {
+        await fetch(`${API_URL}?id=${id}`, { method: 'DELETE' });
         loadGames();
     }
 }
