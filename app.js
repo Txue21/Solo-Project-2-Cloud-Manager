@@ -1,4 +1,4 @@
-const API_URL = 'http://tian-games.gamer.gd/api.php'; 
+const API_URL = '/api/api.php';
 const gameForm = document.getElementById('game-form');
 let allGames = [];
 let currentPage = 1;
