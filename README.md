@@ -1,0 +1,1 @@
+# Solo-Project-2-Cloud-Manager
