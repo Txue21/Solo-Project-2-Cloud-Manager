@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameVault | Cloud Collection Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>🎮 GameVault</h1>
+        <nav>
+            <button onclick="showView('list-view')">View Library</button>
+            <button onclick="showView('form-view')">Add New Game</button>
+            <button onclick="showView('stats-view')">Statistics</button>
+        </nav>
+    </header>
+
+    <main id="app-container">
+        
+        <section id="list-view" class="view">
+            <h2>My Collection</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Platform</th>
+                            <th>Hours</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="game-list-body">
+                        </tbody>
+                </table>
+            </div>
+
+            <div class="pagination" style="margin-top: 20px; display: flex; gap: 15px; align-items: center; justify-content: center;">
+                <button onclick="prevPage()">Previous</button>
+                <span id="page-info" style="font-weight: bold;">Page 1</span>
+                <button onclick="nextPage()">Next</button>
+            </div>
+        </section>
+
+        <section id="form-view" class="view" style="display:none;">
+            <h2 id="form-title">Add New Game</h2>
+            <form id="game-form">
+                <input type="hidden" id="game-id">
+                
+                <div class="form-group">
+                    <label>Game Title:</label>
+                    <input type="text" id="title" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Platform:</label>
+                    <select id="platform" required>
+                        <option value="PC">PC</option>
+                        <option value="PS5">PS5</option>
+                        <option value="Xbox">Xbox</option>
+                        <option value="Switch">Switch</option>
+                        <option value="Mobile">Mobile</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Hours Played:</label>
+                    <input type="number" id="hours" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Status:</label>
+                    <select id="status" required>
+                        <option value="Backlog">Backlog</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="save-btn">Save to Cloud</button>
+                    <button type="button" class="cancel-btn" onclick="showView('list-view')">Cancel</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="stats-view" class="view" style="display:none;">
+            <h2>Library Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Games</h3>
+                    <p id="stat-total-count">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Hours Played</h3>
+                    <p id="stat-total-hours">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Average Playtime</h3>
+                    <p id="stat-avg-hours">0</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
