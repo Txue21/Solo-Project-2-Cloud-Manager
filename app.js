@@ -1,4 +1,4 @@
-const API_URL = '/api/api.php';
+const API_URL = '/api';
 const gameForm = document.getElementById('game-form');
 let allGames = [];
 let currentPage = 1;
