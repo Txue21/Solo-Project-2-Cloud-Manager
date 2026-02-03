@@ -1,5 +1,5 @@
 [[redirects]]
   from = "/api/*"
-  to = "http://tian-games.gamer.gd/:splat"
+  to = "http://tian-games.gamer.gd/api.php"
   status = 200
   force = true
