@@ -8,5 +8,14 @@
 - **Data Storage:** JSON
 - **Hosting:** Netlify (frontend) + Hostinger (backend API)
 
+## JSON Persistence Explanation
+This project uses JSON files to store data on the server instead of a traditional database. Here's how it works:
+
+1. **Storage:** All game data is saved in a `games.json` file on the Hostinger server
+2. **Reading Data:** When the page loads, PHP reads the JSON file using `file_get_contents()` and sends it to the frontend
+3. **Writing Data:** When creating/updating/deleting games, PHP writes changes back to the JSON file using `file_put_contents()`
+4. **Persistence:** The JSON file stays on the server permanently, so data isn't lost when you close the browser or restart the server
+5. **Why JSON?** It's simple, human-readable, and perfect for small projects without needing database setup
+
 ## Loom Link
 https://www.loom.com/share/d080771294be460fb31a50e9568d5762
