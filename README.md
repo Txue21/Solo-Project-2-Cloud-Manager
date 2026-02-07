@@ -1,4 +1,7 @@
-# GameVault - Cloud Game Collection Manager
+# Solo Project: GameVault
+
+- **Tian Xue**
+- **CPSC-3750**
 
 - **Frontend:** https://app.netlify.com/projects/gamevault-cloud/overview
 - **Backend API:** https://tian-game-vault.com/api.php
@@ -8,5 +11,5 @@
 - **Data Storage:** JSON
 - **Hosting:** Netlify (frontend) + Hostinger (backend API)
 
-## Video Demo
-[Add Loom recording link here]
+## Loom Link
+https://www.loom.com/share/d080771294be460fb31a50e9568d5762
