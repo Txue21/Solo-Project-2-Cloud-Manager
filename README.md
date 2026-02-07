@@ -1,7 +1,4 @@
-# Solo Project: GameVault
-
-- **Tian Xue**
-- **CPSC-3750**
+# GameVault
 
 - **Frontend:** https://app.netlify.com/projects/gamevault-cloud/overview
 - **Backend API:** https://tian-game-vault.com/api.php
