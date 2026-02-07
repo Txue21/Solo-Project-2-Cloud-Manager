@@ -8,9 +8,7 @@
 - **Data Storage:** JSON
 - **Hosting:** Netlify (frontend) + Hostinger (backend API)
 
-## JSON Persistence Explanation
-This project uses JSON files to store data on the server instead of a traditional database. Here's how it works:
-
+## JSON Persistence
 1. **Storage:** All game data is saved in a `games.json` file on the Hostinger server
 2. **Reading Data:** When the page loads, PHP reads the JSON file using `file_get_contents()` and sends it to the frontend
 3. **Writing Data:** When creating/updating/deleting games, PHP writes changes back to the JSON file using `file_put_contents()`
