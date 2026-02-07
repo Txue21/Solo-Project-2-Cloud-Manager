@@ -79,24 +79,45 @@ gameForm.addEventListener('submit', async (e) => {
         status: document.getElementById('status').value
     };
 
-    if (id) {
-        gameData.id = id;
-        await fetch(API_URL, { method: 'PUT', body: JSON.stringify(gameData) });
-    } else {
-        await fetch(API_URL, { method: 'POST', body: JSON.stringify(gameData) });
-    }
+    try {
+        let response;
+        if (id) {
+            gameData.id = id;
+            response = await fetch(API_URL, { method: 'PUT', body: JSON.stringify(gameData) });
+        } else {
+            response = await fetch(API_URL, { method: 'POST', body: JSON.stringify(gameData) });
+        }
 
-    gameForm.reset();
-    document.getElementById('game-id').value = '';
-    showView('list-view');
-    loadGames();
+        if (!response.ok) {
+            const error = await response.json();
+            alert('Error: ' + (error.details ? error.details.join(', ') : error.error));
+            return;
+        }
+
+        gameForm.reset();
+        document.getElementById('game-id').value = '';
+        document.getElementById('form-title').innerText = 'Add New Game';
+        showView('list-view');
+        loadGames();
+    } catch (error) {
+        console.error("Error saving game:", error);
+        alert('Failed to save game. Please try again.');
+    }
 });
 
 // DELETE: Remove data via PHP API
 async function deleteGame(id) {
     if (confirm("Are you sure you want to remove this game?")) {
-        await fetch(`${API_URL}?id=${id}`, { method: 'DELETE' });
-        loadGames();
+        try {
+            const response = await fetch(`${API_URL}?id=${id}`, { method: 'DELETE' });
+            if (!response.ok) {
+                throw new Error('Failed to delete game');
+            }
+            loadGames();
+        } catch (error) {
+            console.error("Error deleting game:", error);
+            alert('Failed to delete game. Please try again.');
+        }
     }
 }
 
